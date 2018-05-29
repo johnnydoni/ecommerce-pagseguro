@@ -2,9 +2,9 @@
 
 use \Hcode\Page;
 use \Hcode\Model\User;
-use \GuzzleHttp\Client;
 use \Hcode\PagSeguro\Config;
 use \Hcode\Model\Order;
+use \Hcode\PagSeguro\Transporter;
 
 $app->get('/payment', function() {
 	User::verifyLogin(false);
@@ -26,12 +26,14 @@ $app->get('/payment', function() {
 		"msgError"=>Order::getError(),
 		"years"=>$years,
 		"pagseguro"=>[
-			"urlJS"=>Config::getUrlJS()
+			"urlJS"=>Config::getUrlJS(),
+			"id"=>Transporter::createSession()
 		]
 	]);
 
 });
 
+/* Utilizada para teste
 $app->get('/payment/pagseguro', function() {
 
     $client = new Client();
@@ -42,3 +44,4 @@ $app->get('/payment/pagseguro', function() {
     echo $res->getBody()->getContents();
 
 });
+*/
