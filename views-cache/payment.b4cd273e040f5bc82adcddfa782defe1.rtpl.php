@@ -437,16 +437,24 @@
                 params[field.name] = field.value;
 
             });
-            console.log(formData);
+
             PagSeguroDirectPayment.createCardToken({
                 cardNumber: params.number,
                 cvv: params.cvv,
                 expirationMonth: params.month,
                 expirationYear: params.year,
                 success: function(response) {
-                    console.log("TOKEN", response);
-                    console.log("HASH", PagSeguroDirectPayment.getSenderHash());
-                    consloe.log("PARAMS", params)
+
+                    params.token = response.card.token;
+                    params.hash = PagSeguroDirectPayment.getSenderHash();
+
+                    $.post(
+                        "/payment/credit",
+                        $.param(params),
+                        function(r) {
+                            console.log(r);
+                        }
+                    );
                 },
                 error: function(response) {
                     var errors = [];
