@@ -58,3 +58,5 @@ $app->get('/payment/pagseguro', function() {
 
 });
 */
+
+?>
