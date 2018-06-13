@@ -42,7 +42,7 @@ class Holder {
         $phone = $dom->importNode($phone, true);
         $phone = $documents->appendChild($phone);
 
-        return $sender;
+        return $holder;
     }       
 }
 
