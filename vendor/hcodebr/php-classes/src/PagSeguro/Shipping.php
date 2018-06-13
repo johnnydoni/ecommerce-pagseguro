@@ -32,6 +32,7 @@ class Shipping {
         $address = $this->address->getDOMElement();
         $address = $dom->importNode($address, true);
         $address = $documents->appendChild($address);
+        
         $cost = $dom->createElement("cost", number_format($this->cost,2, ".", ""));
         $cost = $holder->appendChild($cost);   
 
