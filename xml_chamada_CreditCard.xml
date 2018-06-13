@@ -1,0 +1,76 @@
+<payment>
+    <mode>default</mode>
+    <method>creditCard</method>
+    <sender>
+        <name>Fulano Silva</name>
+        <email>fulano.silva@uol.com.br</email>
+        <phone>
+            <areaCode>11</areaCode>
+            <number>30380000</number>
+        </phone>
+        <documents>
+            <document>
+                <type>CPF</type>
+                <value>11475714734</value>
+            </document>
+        </documents>
+        <hash>abc1234</hash>
+    </sender>
+    <currency>BRL</currency>
+    <notificationURL>https://sualoja.com.br/notificacao</notificationURL>
+    <items>
+        <item>
+            <id>1</id>
+            <description>Descricao do item a ser vendido</description>
+            <quantity>2</quantity>
+            <amount>1.00</amount>
+        </item>
+    </items>
+<extraAmount>0.00</extraAmount>
+    <reference>R123456</reference>
+    <shipping>
+        <address>
+            <street>Av. Brigadeiro Faria Lima</street>
+            <number>1384</number>
+            <complement>1 andar</complement>
+            <district>Jardim Paulistano</district>
+            <city>Sao Paulo</city>
+            <state>SP</state>
+            <country>BRA</country>
+            <postalCode>01452002</postalCode>
+        </address>
+        <type>3</type>
+        <cost>0.00</cost>
+    </shipping>
+    <creditCard>
+        <token>4a56sd456a4d54asd65as4d56a4sd564</token>
+       <installment>
+            <quantity>2</quantity>
+            <value>5.50</value>
+        </installment>
+        <holder>
+            <name>Nome impresso no cartao</name>
+            <documents>
+                <document>
+                    <type>CPF</type>
+                    <value>00722333665</value>
+                </document>
+            </documents>
+            <birthDate>20/10/1980</birthDate>
+            <phone>
+                <areaCode>11</areaCode>
+                <number>999991111</number>
+            </phone>
+        </holder>
+        <billingAddress>
+            <street>Av. Brigadeiro Faria Lima</street>
+            <number>1384</number>
+            <complement>1 andar</complement>
+            <district>Jardim Paulistano</district>
+            <city>Sao Paulo</city>
+            <state>SP</state>
+            <country>BRA</country>
+            <postalCode>01452002</postalCode>
+        </billingAddress>
+    </creditCard>
+</payment>

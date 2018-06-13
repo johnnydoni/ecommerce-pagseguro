@@ -64,9 +64,6 @@ class Address {
         $district = $dom->createElement("district", $this->district);
         $district = $address->appendChild($district);
 
-        $postalCode = $dom->createElement("postalCode", $this->postalCode);
-        $postalCode = $address->appendChild($postalCode);
-
         $city = $dom->createElement("city", $this->city);
         $city = $address->appendChild($city);
 
@@ -76,6 +73,9 @@ class Address {
         $country = $dom->createElement("country", $this->country);
         $country = $address->appendChild($country);        
 
+        $postalCode = $dom->createElement("postalCode", $this->postalCode);
+        $postalCode = $address->appendChild($postalCode);
+        
         return $address;
     }        
 
