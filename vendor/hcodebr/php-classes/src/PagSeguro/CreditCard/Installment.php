@@ -2,17 +2,22 @@
 
 namespace HCode\PagSeguro\CreditCard;
 
+use Exception;
+use DOMDocument;
+use DOMElement;
+use Hcode\PagSeguro\Config;
+
 class Installment {
 
     private $quantity;
     private $value;
 
-    public function __construct(Address $quantity, float $value) {
-        if (!$quantity < 1 || $quantity > Config::MAX_INSTALLMENT) {
+    public function __construct(int $quantity, float $value) {
+        if ($quantity < 1 || $quantity > Config::MAX_INSTALLMENT) {
             throw new Exception("Informe o número de parcelas válido.");
         }
 
-        if ($value <= 0) {
+        if ($value <= 0) { 
             throw new Exception("Valor total inválido.");
         }
 
@@ -26,13 +31,13 @@ class Installment {
         $installment = $dom->appendChild($installment);
 
         $value = $dom->createElement("value", number_format($this->value,2, ".", ""));
-        $value = $holder->appendChild($value);   
+        $value = $installment->appendChild($value);   
 
         $quantity = $dom->createElement("quantity", $this->quantity);
-        $quantity = $holder->appendChild($quantity);   
+        $quantity = $installment->appendChild($quantity);   
 
         $noInterestInstallmentQuantity = $dom->createElement("noInterestInstallmentQuantity", Config::MAX_INSTALLMENT_NO_INTEREST);
-        $noInterestInstallmentQuantity = $holder->appendChild($noInterestInstallmentQuantity);   
+        $noInterestInstallmentQuantity = $installment->appendChild($noInterestInstallmentQuantity);   
         
         return $installment;
     }   

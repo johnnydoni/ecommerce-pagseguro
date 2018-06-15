@@ -2,6 +2,11 @@
 
 namespace HCode\PagSeguro;
 
+use Exception;
+use DOMDocument;
+use DOMElement;
+use DateTime;
+
 class Sender {
 
     private $name;
@@ -12,13 +17,13 @@ class Sender {
     private $hash;
     private $ip;
 
-    public function __construct(string $name, Document $cpf, DateTime $bornData, Phone $phone, 
+    public function __construct(string $name, Document $cpf, DateTime $bornDate, Phone $phone, 
       string $email, string $hash) {
         if (!$name) {
             throw new Exception("Informe o nome do comprador.");
         }
 
-        if (!filter_var($email, FILTER_VALIDADE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception("O e-mail informado não é válido");
         }
     
@@ -27,8 +32,8 @@ class Sender {
         }
 
         $this->name = $name;
-        $this->cpf = $cpf;
         $this->bornDate = $bornDate;
+        $this->cpf = $cpf;
         $this->phone = $phone;
         $this->email = $email;
         $this->hash = $hash;
@@ -49,7 +54,7 @@ class Sender {
         $bornDate = $dom->createElement("bornDate", $this->bornDate->format("d/m/Y"));
         $bornDate = $sender->appendChild($bornDate);
         
-        $documents = $dom->createElement("documentes");
+        $documents = $dom->createElement("documents");
         $documents = $sender->appendChild($documents);
 
         $cpf = $this->cpf->getDOMElement();

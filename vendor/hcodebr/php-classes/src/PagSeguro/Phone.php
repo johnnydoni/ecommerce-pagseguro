@@ -1,6 +1,9 @@
 <?php
 
 namespace HCode\PagSeguro;
+use Exception;
+use DOMDocument;
+use DOMElement;
 
 class Phone {
 

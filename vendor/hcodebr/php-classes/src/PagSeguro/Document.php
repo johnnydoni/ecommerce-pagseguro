@@ -2,6 +2,10 @@
 
 namespace HCode\PagSeguro;
 
+use Exception;
+use DOMDocument;
+use DOMElement;
+
 class Document {
 
     private $type;
@@ -9,16 +13,16 @@ class Document {
 
     const CPF = "CPF";
 
-    public function __construct(string $typ, string $value) {
+    public function __construct(string $type, string $value) {
         if (!$value) {
             throw new Exception("Informe o valor do documento");
         }
 
         switch ($type) {
             case Document::CPF:
-            if (!Document::isValidCPF($value)) {
-                throw new Exception("CPF inválido");                
-            }
+           if (!Document::isValidCPF($value)) {
+               throw new Exception("CPF inválido");                
+           }
             break;
         }
 
@@ -26,7 +30,7 @@ class Document {
         $this->value = $value;
     }
 
-    public static function isValidCPF($number):boolean {
+    public static function isValidCPF($number):bool {
         $number = preg_replace('/[^0-9]/', '', (string) $number);
     
         if (strlen($number) != 11)
