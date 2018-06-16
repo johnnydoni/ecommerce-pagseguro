@@ -2,6 +2,12 @@
 
 namespace HCode\PagSeguro;
 
+use Exception;
+use DOMDocument;
+use DOMElement;
+use Hcode\PagSeguro\CreditCard\Installment;
+use Hcode\PagSeguro\CreditCard\Holder;
+
 class CreditCard {
 
     private $token;
@@ -9,7 +15,7 @@ class CreditCard {
     private $holder;
     private $billingAddress;
 
-    public function __construct(string $token, Installment $installment, Holder $holder, Address $billingAddres) {
+    public function __construct(string $token, Installment $installment, Holder $holder, Address $billingAddress) {
         if (!$token) {
             throw new Exception("Informe o token do cartão de crédito.");
         }

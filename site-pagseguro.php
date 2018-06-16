@@ -12,6 +12,9 @@ use \Hcode\PagSeguro\Sender;
 use \Hcode\PagSeguro\CreditCard\Holder;
 use \Hcode\PagSeguro\Shipping;
 use \Hcode\PagSeguro\CreditCard\Installment;
+use \Hcode\PagSeguro\CreditCard;
+use \Hcode\PagSeguro\Item;
+use \Hcode\PagSeguro\Payment;
 
 
 $app->post("/payment/credit", function(){
@@ -21,10 +24,10 @@ $app->post("/payment/credit", function(){
 	$order->get((int)$order->getidorder());
 	$address = $order->getAddress();
 	$cart = $order->getCart();
-
 	$cpf = new Document(Document::CPF, $_POST['cpf']);
 	$phone = new Phone($_POST['ddd'], $_POST['phone']);
-	$address = new Address(
+
+	$shippingAddress = new Address(
 		$address->getdesaddress(),
 		$address->getdesnumber(),
 		$address->getdescomplement(),
@@ -39,15 +42,37 @@ $app->post("/payment/credit", function(){
 	$sender = new Sender($order->getdesperson(), $cpf, $birthDate, $phone, $order->getdesemail(), $_POST['hash']);
 
 	$holder = new Holder($order->getdesperson(), $cpf, $birthDate, $phone);
-
-	$shipping = new Shipping($address, (float)$cart->getvlfreight(), Shipping::PAC);
-
+	$shipping = new Shipping($shippingAddress, (float)$cart->getvlfreight(), Shipping::PAC);
 	$installment = new Installment((int)$_POST['installments_qtd'], (float)$_POST['installments_value']);
 
-	$dom = new DOMDocument();
-	$test = $installment->getDOMElement();
-	$testNode = $dom->importNode($test, true);
-	$dom->appendChild($testNode);
+	$billingAddress = new Address(
+		$address->getdesaddress(),
+		$address->getdesnumber(),
+		$address->getdescomplement(),
+		$address->getdesdistrict(),
+		$address->getdeszipcode(),
+		$address->getdescity(),
+		$address->getdesstate(),
+		$address->getdescountry()		
+	);
+
+	$creditCard = new CreditCard($_POST["token"], $installment, $holder, $billingAddress);
+
+	$payment = new Payment($order->getidorder(), $sender, $shipping);
+
+	foreach ($cart->getProducts() as $product) {
+		$item = new Item(
+			(int)$product["idproduct"],
+			$product["desproduct"],
+			(float)$product["vlprice"],
+			(int)$product["nrqtd"]
+		);
+		$payment->addItem($item);
+	}
+
+	$payment->setCreditCard($creditCard);
+
+	$dom = $payment->getDOMDocument();
 	echo $dom->saveXml();
 
 });

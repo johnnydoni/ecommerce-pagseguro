@@ -2,6 +2,10 @@
 
 namespace HCode\PagSeguro;
 
+use Exception;
+use DOMDocument;
+use DOMElement;
+
 class Item {
 
     private $id;
