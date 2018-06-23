@@ -18,9 +18,9 @@ class Config {
     const SANDBOX_URL_JS = "https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
     const PRODUCTION_URL_JS = "https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
 
-    const SANDBOX_URL_TRANSACTION = "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions";
-    const PRODUCTION_URL_TRANSACTION = "https://ws.pagseguro.uol.com.br/v2/transactions";
-    
+    const SANDBOX_URL_TRANSACTION = "https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/transactions";
+    const PRODUCTION_URL_TRANSACTION = "https://stc.pagseguro.uol.com.br/pagseguro/api/v2/transactions";
+        
     const MAX_INSTALLMENT_NO_INTEREST = 10;
     const MAX_INSTALLMENT = 10;
 
