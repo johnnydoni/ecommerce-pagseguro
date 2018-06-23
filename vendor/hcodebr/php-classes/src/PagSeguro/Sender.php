@@ -51,9 +51,13 @@ class Sender {
         $email = $dom->createElement("email", $this->email);
         $email = $sender->appendChild($email);
 
-        $bornDate = $dom->createElement("bornDate", $this->bornDate->format("d/m/Y"));
-        $bornDate = $sender->appendChild($bornDate);
-        
+//        $bornDate = $dom->createElement("bornDate", $this->bornDate->format("d/m/Y"));
+//        $bornDate = $sender->appendChild($bornDate);
+
+        $phone = $this->phone->getDOMElement();
+        $phone = $dom->importNode($phone, true);
+        $phone = $sender->appendChild($phone);        
+
         $documents = $dom->createElement("documents");
         $documents = $sender->appendChild($documents);
 
@@ -61,15 +65,11 @@ class Sender {
         $cpf = $dom->importNode($cpf, true);
         $cpf = $documents->appendChild($cpf);
 
-        $phone = $this->phone->getDOMElement();
-        $phone = $dom->importNode($phone, true);
-        $phone = $sender->appendChild($phone);
-
         $hash = $dom->createElement("hash", $this->hash);
         $hash = $sender->appendChild($hash);        
 
-        $ip = $dom->createElement("ip", $this->ip);
-        $ip = $sender->appendChild($ip);        
+//        $ip = $dom->createElement("ip", $this->ip);
+//        $ip = $sender->appendChild($ip);        
 
         return $sender;
     }          

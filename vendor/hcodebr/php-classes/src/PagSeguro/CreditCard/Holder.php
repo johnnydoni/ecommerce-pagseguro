@@ -35,11 +35,11 @@ class Holder {
         $name = $dom->createElement("name", $this->name);
         $name = $holder->appendChild($name);        
 
+        $documents = $dom->createElement("documents");
+        $documents = $holder->appendChild($documents);
+
         $birthDate = $dom->createElement("birthDate", $this->birthDate->format("d/m/Y"));
         $birthDate = $holder->appendChild($birthDate);
-        
-        $documents = $dom->createElement("documentes");
-        $documents = $holder->appendChild($documents);
 
         $cpf = $this->cpf->getDOMElement();
         $cpf = $dom->importNode($cpf, true);

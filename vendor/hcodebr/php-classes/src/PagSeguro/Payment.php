@@ -82,13 +82,13 @@ class Payment {
             $item = $items->appendChild($item);
         }
         
-        // reference
-        $reference = $dom->createElement("reference", $this->reference);
-        $reference = $payment->appendChild($reference);
-
         // extraAmount
         $extraAmount = $dom->createElement("extraAmount", $this->extraAmount);
         $extraAmount = $payment->appendChild($extraAmount);
+
+        // reference
+        $reference = $dom->createElement("reference", $this->reference);
+        $reference = $payment->appendChild($reference);
 
         // shipping
         $shipping = $this->shipping->getDOMElement();

@@ -37,14 +37,14 @@ class Shipping {
         $address = $dom->importNode($address, true);
         $address = $shipping->appendChild($address);
         
-        $cost = $dom->createElement("cost", number_format($this->cost,2, ".", ""));
-        $cost = $shipping->appendChild($cost);   
-
         $type = $dom->createElement("type", $this->type);
         $type = $shipping->appendChild($type);   
 
-        $addressRequired = $dom->createElement("addressRequired", ($this->addressRequired) ? "true" : "false");
-        $addressRequired = $shipping->appendChild($addressRequired);   
+        $cost = $dom->createElement("cost", number_format($this->cost,2, ".", ""));
+        $cost = $shipping->appendChild($cost);   
+
+//        $addressRequired = $dom->createElement("addressRequired", ($this->addressRequired) ? "true" : "false");
+//        $addressRequired = $shipping->appendChild($addressRequired);   
         
         return $shipping;
     }  
