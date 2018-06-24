@@ -60,18 +60,17 @@ class Payment {
         $method = $dom->createElement("method", $this->method);
         $method = $payment->appendChild($method);
 
-        // sender
-        $sender = $this->sender->getDOMElement();
-        $sender = $dom->importNode($sender, true);
-        $sender = $payment->appendChild($sender);
-
+        //receiverEmail
+        $receiverEmail = $dom->createElement("receiverEmail", Config::SANDBOX_EMAIL);
+        $receiverEmail = $payment->appendChild($receiverEmail);
+        
         // currency
         $currency = $dom->createElement("currency", $this->currency);
         $currency = $payment->appendChild($currency);
 
-        // notificationURL
-        $notificationURL = $dom->createElement("notificationURL", Config::NOTIFICATION_URL);
-        $notificationURL = $payment->appendChild($notificationURL);
+        // extraAmount
+        $extraAmount = $dom->createElement("extraAmount", $this->extraAmount);
+        $extraAmount = $payment->appendChild($extraAmount);
 
         // items
         $items = $dom->createElement("items");
@@ -81,14 +80,19 @@ class Payment {
             $item = $dom->importNode($item, true);
             $item = $items->appendChild($item);
         }
-        
-        // extraAmount
-        $extraAmount = $dom->createElement("extraAmount", $this->extraAmount);
-        $extraAmount = $payment->appendChild($extraAmount);
+
+        // notificationURL
+        $notificationURL = $dom->createElement("notificationURL", Config::NOTIFICATION_URL);
+        $notificationURL = $payment->appendChild($notificationURL);
 
         // reference
         $reference = $dom->createElement("reference", $this->reference);
         $reference = $payment->appendChild($reference);
+
+        // sender
+        $sender = $this->sender->getDOMElement();
+        $sender = $dom->importNode($sender, true);
+        $sender = $payment->appendChild($sender);
 
         // shipping
         $shipping = $this->shipping->getDOMElement();

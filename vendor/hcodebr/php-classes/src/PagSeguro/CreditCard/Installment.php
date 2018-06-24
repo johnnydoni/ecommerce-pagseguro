@@ -34,13 +34,13 @@ class Installment {
         $quantity = $installment->appendChild($quantity);  
 
         $value = $dom->createElement("value", number_format($this->value,2, ".", ""));
-        $value = $installment->appendChild($value);   
-
-//        $noInterestInstallmentQuantity = $dom->createElement("noInterestInstallmentQuantity", Config::MAX_INSTALLMENT_NO_INTEREST);
-//        $noInterestInstallmentQuantity = $installment->appendChild($noInterestInstallmentQuantity);   
+        $value = $installment->appendChild($value); 
         
+        $noInterestInstallmentQuantity = $dom->createElement("noInterestInstallmentQuantity", Config::MAX_INSTALLMENT_NO_INTEREST);
+        $noInterestInstallmentQuantity = $installment->appendChild($noInterestInstallmentQuantity);   
+
         return $installment;
-    }   
+    }  
 
 }
 
