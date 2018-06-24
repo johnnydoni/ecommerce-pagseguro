@@ -36,8 +36,10 @@ class Installment {
         $value = $dom->createElement("value", number_format($this->value,2, ".", ""));
         $value = $installment->appendChild($value); 
         
-        $noInterestInstallmentQuantity = $dom->createElement("noInterestInstallmentQuantity", Config::MAX_INSTALLMENT_NO_INTEREST);
-        $noInterestInstallmentQuantity = $installment->appendChild($noInterestInstallmentQuantity);   
+        if ($this->quantity > 1) {
+            $noInterestInstallmentQuantity = $dom->createElement("noInterestInstallmentQuantity", Config::MAX_INSTALLMENT_NO_INTEREST);
+            $noInterestInstallmentQuantity = $installment->appendChild($noInterestInstallmentQuantity);   
+        }
 
         return $installment;
     }  

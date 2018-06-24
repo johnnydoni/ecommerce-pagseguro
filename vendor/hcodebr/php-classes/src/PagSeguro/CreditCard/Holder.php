@@ -38,12 +38,12 @@ class Holder {
         $documents = $dom->createElement("documents");
         $documents = $holder->appendChild($documents);
 
-        $birthDate = $dom->createElement("birthDate", $this->birthDate->format("d/m/Y"));
-        $birthDate = $holder->appendChild($birthDate);
-
         $cpf = $this->cpf->getDOMElement();
         $cpf = $dom->importNode($cpf, true);
         $cpf = $documents->appendChild($cpf);
+
+        $birthDate = $dom->createElement("birthDate", $this->birthDate->format("d/m/Y"));
+        $birthDate = $holder->appendChild($birthDate);
 
         $phone = $this->phone->getDOMElement();
         $phone = $dom->importNode($phone, true);

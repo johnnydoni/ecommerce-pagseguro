@@ -79,7 +79,7 @@ class Address {
 
         $postalCode = $dom->createElement("postalCode", $this->postalCode);
         $postalCode = $address->appendChild($postalCode);
-        
+
         return $address;
     }        
 
