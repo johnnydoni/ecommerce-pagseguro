@@ -70,12 +70,11 @@ $app->post("/payment/credit", function(){
 	}
 
 	$payment->setCreditCard($creditCard);
+	Transporter::sendTransaction($payment);	
 
 	//  $dom = $payment->getDOMDocument();
 	//  echo $dom->saveXml();
 	//  exit;
-
-	Transporter::sendTransaction($payment);
 });
 
 $app->get('/payment', function() {
