@@ -4,6 +4,7 @@ namespace HCode\PagSeguro;
 
 use \GuzzleHttp\Client;
 use Hcode\Model\Order;
+use Hcode\PagSeguro\Config;
 
 class Transporter {
 
