@@ -17,6 +17,22 @@ use \Hcode\PagSeguro\Item;
 use \Hcode\PagSeguro\Payment;
 use \Hcode\PagSeguro\Bank;
 
+$app->post("/payment/notification", function(){
+	$url = "";
+	switch ($_POST["notificationType"]) {
+		case "transaction":
+		$url = Config::getNotificationTransactionURL();
+		break;
+
+		default:
+		throw new Exception("Notificação invávlida.");
+		break;		
+	}
+
+	Transporter::getNotification($_POST["notificationCode"], $_POST["notificationType"]);
+
+});
+
 $app->get("/payment/success/debit", function() {
 	User::verifyLogin(false);
 	$order = new Order();
